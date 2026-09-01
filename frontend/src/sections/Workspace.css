@@ -1,0 +1,124 @@
+.workspace { background: var(--bg-white); }
+
+.workspace-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.ws-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.ws-card {
+  background: var(--primary-light);
+  border: 1px solid rgba(91,91,214,0.18);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.ws-card-full {
+  grid-column: 1 / -1;
+}
+
+.ws-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.ws-icon { font-size: 20px; }
+
+.ws-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Dual pane visual */
+.dual-pane {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+}
+
+.pane {
+  background: #0f0f1a;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid rgba(91,91,214,0.2);
+}
+
+.pane-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+
+.pane-content { display: flex; flex-direction: column; gap: 8px; }
+
+.pane-line {
+  height: 8px;
+  border-radius: 3px;
+  background: rgba(168,180,216,0.15);
+}
+.pane-line.bold { background: rgba(168,180,216,0.35); height: 10px; }
+.pane-line.short { width: 65%; }
+.pane-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 6px 0; }
+
+.code-pane { gap: 7px; }
+.code-l {
+  height: 8px;
+  border-radius: 3px;
+  background: rgba(168,180,216,0.15);
+}
+.code-l.accent-l { background: rgba(91,91,214,0.5); width: 80%; }
+.code-l.indent { margin-left: 16px; width: calc(100% - 16px); }
+.code-l.short { width: 55%; }
+
+.pane-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.run-btn, .submit-btn {
+  padding: 7px 14px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+}
+
+.run-btn {
+  background: rgba(91,91,214,0.25);
+  color: rgba(255,255,255,0.8);
+}
+
+.submit-btn {
+  background: var(--primary);
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .workspace-inner { grid-template-columns: 1fr; }
+  .workspace-right { order: -1; }
+}
+
+@media (max-width: 480px) {
+  .ws-cards { grid-template-columns: 1fr; }
+  .ws-card-full { grid-column: auto; }
+}

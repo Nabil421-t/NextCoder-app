@@ -1,0 +1,101 @@
+.problem-library { background: var(--bg-light); }
+
+.library-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+  margin-top: 48px;
+}
+
+.lib-subtitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.lib-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.topic-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.topic-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(91,91,214,0.08);
+}
+
+.topic-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.topic-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Problem list window */
+.problem-list-window {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.plw-header {
+  padding: 14px 20px;
+  background: #F3F4F6;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.plw-title { font-weight: 700; font-size: 15px; }
+.plw-sub { font-size: 13px; color: var(--text-muted); }
+
+.plw-body { padding: 8px 0; }
+
+.plw-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-bottom: 1px solid #F3F4F6;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.plw-row:hover { background: var(--bg-light); }
+.plw-row:last-child { border-bottom: none; }
+
+.plw-name { color: var(--text-primary); font-weight: 500; }
+.plw-diff { font-weight: 700; font-size: 12px; letter-spacing: 0.04em; }
+
+@media (max-width: 900px) {
+  .library-inner { grid-template-columns: 1fr; }
+  .topic-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .topic-grid { grid-template-columns: 1fr; }
+}

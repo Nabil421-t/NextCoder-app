@@ -1,0 +1,44 @@
+/* ============================================================
+   Contests — theme tokens
+   The Contests pages run as their own full-bleed dark "arena",
+   independent of the light marketing site — same idea as a
+   dedicated competitive-programming contest hub. Everything below
+   is derived only from these variables.
+   ============================================================ */
+:root {
+  --nc-bg: #0B0B0F;
+  --nc-bg-elevated: #131318;
+  --nc-bg-card: #1A1A21;
+  --nc-surface: rgba(147, 92, 246, 0.06);
+  --nc-surface-strong: rgba(147, 92, 246, 0.12);
+  --nc-border: rgba(147, 92, 246, 0.18);
+  --nc-border-strong: rgba(167, 139, 250, 0.45);
+
+  --nc-primary: #8b5cf6;
+  --nc-primary-light: #a78bfa;
+  --nc-primary-dark: #6d28d9;
+  --nc-gradient: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 45%, #4f46e5 100%);
+  --nc-gradient-2: linear-gradient(135deg, #fbbf24 0%, #ec4899 50%, #8b5cf6 100%);
+
+  --nc-text: #f6f3ff;
+  --nc-text-muted: #b3a5d9;
+  --nc-text-faint: #7a6ba0;
+
+  --nc-live: #34d399;
+  --nc-live-glow: rgba(52, 211, 153, 0.4);
+  --nc-upcoming: #60a5fa;
+  --nc-upcoming-glow: rgba(96, 165, 250, 0.4);
+  --nc-ended: #9a8fc0;
+  --nc-ended-glow: rgba(154, 143, 192, 0.2);
+
+  --nc-easy: #34d399;
+  --nc-medium: #fbbf24;
+  --nc-hard: #f87171;
+
+  --nc-font-display: 'Sora', 'Poppins', system-ui, sans-serif;
+  --nc-font-body: 'Inter', system-ui, sans-serif;
+
+  --nc-radius-lg: 24px;
+  --nc-radius-md: 16px;
+  --nc-radius-sm: 10px;
+}

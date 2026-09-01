@@ -1,0 +1,110 @@
+.learning-path { background: var(--bg-white); }
+
+.learning-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.learning-steps {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.lp-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  position: relative;
+  padding-bottom: 32px;
+}
+
+.lp-step:last-child { padding-bottom: 0; }
+
+.lp-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 42px;
+  bottom: 0;
+  width: 2px;
+  background: rgba(91,91,214,0.2);
+}
+
+.lp-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: var(--primary-light);
+  border: 1px solid rgba(91,91,214,0.25);
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.lp-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.lp-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Illustration */
+.learning-right { display: flex; align-items: center; justify-content: center; }
+
+.learning-illustration {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+}
+
+.illus-monitor {
+  background: #0d0d1a;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(91,91,214,0.3);
+}
+
+.monitor-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.monitor-line {
+  height: 10px;
+  border-radius: 4px;
+  background: rgba(168,180,216,0.2);
+}
+.monitor-line.accent { background: rgba(91,91,214,0.6); width: 70%; }
+.monitor-line.short { width: 55%; }
+
+.illus-badge {
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .learning-inner { grid-template-columns: 1fr; }
+  .learning-right { order: -1; }
+}
