@@ -14,23 +14,23 @@
 
 ## 📌 Executive Summary & Value Proposition
 
-**NextCoder** is an enterprise-grade, distributed Data Structures & Algorithms (DSA) learning platform and high-throughput Online Judge system. Engineered to handle high concurrency during live coding examinations and competitive contests, NextCoder decouples code compilation/execution from API web threads using an **asynchronous RabbitMQ worker pipeline** backed by **sandboxed Docker execution containers**.
+**NextCoder** is an enterprise-grade, distributed Data Structures & Algorithms (DSA) learning platform and high-throughput Online Judge system. Engineered to handle high concurrency during live coding exams and asynchronous code evaluation at scale.
 
-The platform features high-concurrency **write-behind Redis caching** for exam session state and focus tracking, **token-bucket rate limiting** executed directly within Redis via custom Lua scripts, multi-level L1/L2 caching (Caffeine + Redis), and automated profile synchronization with external competitive programming platforms (**LeetCode** and **Codeforces**).
+The platform features high-concurrency **write-behind Redis caching** for exam session state and focus tracking, **token-bucket rate limiting** executed directly within Redis via custom Lua scripts, and a **containerized sandbox execution engine** using ephemeral Docker instances with strict resource isolation.
 
 ---
 
 ## ✨ Key System Features & Technical Capabilities
 
 ### ⚡ 1. Asynchronous Sandboxed Code Execution Engine
-* **Containerized Sandbox Isolation**: Code execution for C++, Java, Python, and JavaScript is executed inside ephemeral Docker containers with strict CPU, wall-clock time limits (`timeout-ms`), memory caps, and write restrictions.
+* **Containerized Sandbox Isolation**: Code execution for C++, Java, Python, and JavaScript is executed inside ephemeral Docker containers with strict CPU, wall-clock time limits (`timeout-ms`), memory quotas, and network isolation to prevent resource exhaustion or malicious escapes.
 * **Non-Blocking Evaluation Pipeline**: Submissions are immediately persisted in MySQL with a `PENDING` state and pushed to a RabbitMQ AMQP exchange (`submission.exchange`).
 * **Decoupled Worker Pool**: Background `JudgeWorker` threads consume execution tasks, invoke `JudgeEngine` to run code against configured test cases, compute execution metrics, and update MySQL atomically.
 * **Dead Letter Queue (DLQ) & Resilience**: Submissions failing due to transient container/system errors are re-routed to retry queues and DLQs, preventing thread blockages or data loss.
 
 ### 🛡️ 2. Distributed Write-Behind Buffering & Exam Engine
 * **High-Throughput Exam Session Management**: Real-time exam submissions and candidate focus-loss/anti-cheat tracking (tab switching, focus blur) are buffered in Redis in-memory stores.
-* **Scheduled Write-Behind Flush**: A dedicated `UserExamFlushScheduler` flushes buffered session state to the MySQL database periodically in batches, mitigating database write bottlenecks during high-concurrency exams.
+* **Scheduled Write-Behind Flush**: A dedicated `UserExamFlushScheduler` flushes buffered session state to the MySQL database periodically in batches, mitigating database write bottlenecks during high-concurrency exam periods.
 * **Strict Exam Window & Time Rules**: Automatic exam termination, submission constraints, and live contest leaderboards.
 
 ### 🔒 3. Enterprise Security & Rate Limiting
@@ -43,7 +43,7 @@ The platform features high-concurrency **write-behind Redis caching** for exam s
 * **Vite + React SPA Frontend**: Ultra-responsive UI powered by React 18, Tailwind CSS, Framer Motion animations, and Monaco Code Editor integrations.
 
 ### 📊 5. Third-Party Competitive Platform Integration
-* **LeetCode & Codeforces Analytics**: Background workers fetch real-time user statistics, contest ratings, solved problem metrics, and submission histories via LeetCode GraphQL API and Codeforces REST API.
+* **LeetCode & Codeforces Analytics**: Background workers fetch real-time user statistics, contest ratings, solved problem metrics, and submission histories via LeetCode GraphQL API and Codeforces REST endpoints.
 
 ---
 
@@ -312,46 +312,6 @@ erDiagram
 
 ---
 
-## ⚙️ Environment Configuration (`.env`)
-
-Create a `.env` file inside the `backend/` directory using the reference configuration below:
-
-```ini
-# ===============================
-# Server & Network Configuration
-# ===============================
-PORT=8083
-FRONTEND_URL=http://localhost:5173/
-
-# ===============================
-# MySQL Database Configuration
-# ===============================
-DATABASE_URL=jdbc:mysql://localhost:3306/dsa_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Dhaka
-MYSQL_USER=root
-MYSQL_PASSWORD=your_secure_password
-
-# ===============================
-# Cache & Message Broker Ports
-# ===============================
-REDIS_PORT=6379
-RABBITMQ_PORT=5672
-
-# ===============================
-# JWT Security Tokens
-# ===============================
-SECRET_KEY=your_super_secret_base64_encoded_jwt_key_must_be_256_bits_minimum
-ACCESS_EXPIRATION=900000
-REFRESH_EXPIRATION=604800000
-
-# ===============================
-# SMTP Email Service Configuration
-# ===============================
-MAIL_USER=your-system-email@gmail.com
-MAIL_PASS=your_google_app_password
-```
-
----
-
 ## 🏁 Quick Start & Installation Guide
 
 ### Prerequisites
@@ -481,7 +441,7 @@ Project_1/
 
 ## 🔒 Security & Production Hardening Notes
 
-1. **Docker Container Hardening**: The `JudgeEngine` spawns container instances with `--read-only` root filesystems, `--net none` (network access disabled to prevent SSRF/exfiltration), and strict memory limit boundaries (`--memory 256m`).
+1. **Docker Container Hardening**: The `JudgeEngine` spawns container instances with `--read-only` root filesystems, `--net none` (network access disabled to prevent SSRF/exfiltration), and strict memory/CPU limits to prevent resource exhaustion or privilege escalation.
 2. **Rate Limiting**: API routes are protected by Bucket4j sliding-window rate limiting to block automated brute-force attacks.
 3. **CORS Policy**: Configured in `WebMvcConfig.java` to restrict origin access exclusively to the specified `FRONTEND_URL`.
 
